@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './components/Home/Home';
 import { SignUpForm } from './components/SignUpForm/SignUpForm';
 import { Profile } from './components/Profile/Profile';
-import { InvalidUrl } from './components/errors/InvalidUrl/InvalidUrl';
+import { InvalidUrl } from './components/InvalidUrl/InvalidUrl';
 
 /* const handleLogIn = (event) => {
   fb.logIn('joan@gmail.com', '123456');  

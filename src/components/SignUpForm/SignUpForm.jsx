@@ -20,10 +20,33 @@ export const SignUpForm = () => {
     setPassword(newValue);
   }
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   fb.signUp(email, password)
+  //     .then(() => {
+  //       history.push('/profile');
+  //     }, (reason) => {
+  //       console.log(reason);
+  //     });
+  // }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    fb.signUp(email, password);
-    history.push('/profile');
+    fb.signUp(email, password)
+      .then(() => {
+        addNewUser({ email });
+      }, (reason) => {
+        console.log(reason);
+      });
+  }
+
+  const addNewUser = (user) => {
+    fb.addUser(user).then((userDoc) => {
+      history.push('/profile');
+      console.log(userDoc.id)
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   return (
