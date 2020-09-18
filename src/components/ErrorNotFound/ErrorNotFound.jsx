@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const InvalidUrl = () => {
+export const ErrorNotFound = () => {
 
   return (
     <div>

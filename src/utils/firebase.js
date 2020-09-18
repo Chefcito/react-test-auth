@@ -20,27 +20,6 @@ const auth = firebase.auth();
 const database = firebase.firestore();
 const usersRef = database.collection('users');
 
-/* const signUp = async (email, password) => {
-  let atRegex = /@/;
-  if (atRegex.test(email) === false) {
-    alert('Ingresa un correo electrónico válido');
-    return;
-  } else if (password.length > 6) {
-    alert('La contraseña debe tener 6 caracteres como mínimo.');
-    return;
-  }
-
-  try {
-    await auth.createUserWithEmailAndPassword(email, password);
-    let newUser = {
-      email: email,
-    }
-    addUser(newUser);
-  } catch (error) {
-    throw new Error(error);
-  }
-} */
-
 const signUp = async (email, password) => {
   let atRegex = /@/;
   if (atRegex.test(email) === false) {
@@ -51,38 +30,27 @@ const signUp = async (email, password) => {
     return;
   }
 
-  await auth.createUserWithEmailAndPassword(email, password)
-    .catch((error => {
-      throw new Error(error.message);
-    }))
-    .then((userCredential) => {
-      /* let newUser = {
-        email: email,
-      }
-      addUser(newUser); */
-    });
+  try {
+    return await auth.createUserWithEmailAndPassword(email, password);
+  } catch (error) {
+    throw new Error(error.code);
+  }
 }
 
-const logIn = (email, password) => {
-  auth.signInWithEmailAndPassword(email, password)
-    .catch((err) => {
-      console.log("err ", err)
-    })
-    .then(message => {
-      console.log(message)
-    });
+const logIn = async (email, password) => {
+  try {
+    return await auth.signInWithEmailAndPassword(email, password);
+  } catch (error) {
+    throw new Error(error.code);
+  }
 }
 
 const addUser = async (user) => {
-  var document = await usersRef.add(user)
-    .catch((err) => {
-      console.error(err);
-    }).then((document) => {
-      console.log('Usuario añadido');
-      return document;
-    });
-
-  return document;
+  try {
+    return await usersRef.add(user);
+  } catch (error) {
+    throw new Error(error.code);
+  }
 }
 
 export const fb = {

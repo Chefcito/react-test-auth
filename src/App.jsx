@@ -1,14 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Home } from './components/Home/Home';
-import { SignUpForm } from './components/SignUpForm/SignUpForm';
-import { Profile } from './components/Profile/Profile';
-import { InvalidUrl } from './components/InvalidUrl/InvalidUrl';
-
-/* const handleLogIn = (event) => {
-  fb.logIn('joan@gmail.com', '123456');  
-} */
+import { Home } from './containers/Home/Home';
+import { SignInForm } from './components/SignInForm/SignInForm';
+import { Profile } from './containers/Profile/Profile';
+import { ErrorNotFound } from './components/ErrorNotFound/ErrorNotFound';
 
 function App() {
   return (
@@ -16,9 +12,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path='/signup' component={SignUpForm} />
+          <Route path='/signup' component={SignInForm} />
           <Route path='/profile' component={Profile} />
-          <Route component={InvalidUrl} />
+          <Route component={ErrorNotFound} />
         </Switch>
       </Router>
     </div>
